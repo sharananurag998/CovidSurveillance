@@ -3,6 +3,6 @@ from django.db import models
 # Create your models here.
 
 class HomeModel(models.Model):
-    active_cases = models.IntegerField()
+    state = models.TextField()
     district = models.TextField()
     zone = models.TextField()
