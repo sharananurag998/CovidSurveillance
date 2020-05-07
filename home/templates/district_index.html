@@ -13,9 +13,14 @@
         </div>
         
         <br>
+        <form class="form-inline md-form mr-auto mb-4">
+            <input class="form-control mr-sm-2 myInput" onkeyup="searchFunction()"  type="text" placeholder="Type to Search" aria-label="Search">
+        </form>
+
+        <br>
         <div class="row">
             {% for district in districts %}
-                <div class="col-md-4">
+                <div class="col-md-4 district-card">
                     <div class="card mb-2">
                         <div class="card-body">
                             <h5 class="card-title">{{ district.district }}</h5>
@@ -28,7 +33,23 @@
                 </div>
             {% endfor %}
         </div>
-        
+        <script>
+            function searchFunction(){
+                var cards = document.querySelectorAll(".district-card");
+                var input = document.querySelector('.myInput');
+                var filter = input.value.toUpperCase();
+                cards.forEach(hideCards);
+                function hideCards(value, index, array)
+                {
+                    if(value.childNodes[1].childNodes[1].childNodes[1].textContent.toUpperCase().indexOf(filter) > -1)
+                        value.style.display = "";
+                    else
+                        value.style.display = "none";
+                }
+            }
+            
+            
+        </script>
     
     </div>
 {% endblock page_content %}
