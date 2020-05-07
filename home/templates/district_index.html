@@ -3,22 +3,32 @@
 {% block page_content %}
 
     <div class = "pagestart" style="margin: 20px 10px 10px 20px">
-
-        <h1>Districts: -</h1>
-        {% for district in districts %}
-        <div class="col-md-4">
-            <div class="card mb-2">
-                <div class="card-body">
-                    <h5 class="card-title">{{ district.district }}</h5>
-                    <p class="card-text">{{ district.zone }} Zone</p>
-                    <a href="{% url 'district_detail' district.pk %}"
-                        class="btn btn-primary">
-                        Read More
-                    </a>
-                </div>
-            </div>
+        <br>
+        <div class="row">
+        <div class="col-md-4"><h1>Districts: -</h1></div>
+        <div class="col-md-4 offset-md-4">
+            Last Updated: {{ districts.0.lastupdated }}
+            <a href="/districts/refresh"><button type="button" class="btn btn-primary">Refresh</button></a>
         </div>
-        {% endfor %}
+        </div>
+        
+        <br>
+        <div class="row">
+            {% for district in districts %}
+                <div class="col-md-4">
+                    <div class="card mb-2">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ district.district }}</h5>
+                            <p class="card-text">{{ district.zone }} Zone</p>
+                            <a href="{% url 'district_detail' district.pk %}" class="btn btn-primary">
+                                Read More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
     
     </div>
 {% endblock page_content %}
