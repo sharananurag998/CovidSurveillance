@@ -1,5 +1,5 @@
 from django.urls import path
-from home import views
+from districts import views
 
 urlpatterns = [
     path('', views.district_index_display, name='district_index_display'),

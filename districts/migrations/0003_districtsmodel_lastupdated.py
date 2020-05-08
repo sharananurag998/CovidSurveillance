@@ -6,12 +6,12 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('home', '0002_auto_20200506_0415'),
+        ('districts', '0002_auto_20200506_0415'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='homemodel',
+            model_name='DistrictsModel',
             name='lastupdated',
             field=models.DateTimeField(auto_now=True),
         ),

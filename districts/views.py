@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from home.models import HomeModel
+from districts.models import DistrictsModel
 import requests
 import datetime
 # Create your views here.
@@ -10,13 +10,13 @@ def hello_world(request):
 def district_index_refresh(request):
     response = requests.get('https://api.covid19india.org/zones.json')
     zonedata = response.json()
-    p = HomeModel.objects.all()
+    p = DistrictsModel.objects.all()
     p.delete()
     for i in zonedata.items():
         for j in i[1]:
-            p = HomeModel(state=j['state'], district=j['district'], zone=j['zone'], lastupdated=datetime.datetime.now())
+            p = DistrictsModel(state=j['state'], district=j['district'], zone=j['zone'], lastupdated=datetime.datetime.now())
             p.save()
-    districts = HomeModel.objects.all()
+    districts = DistrictsModel.objects.all()
     context = {
         'districts': districts
     }
@@ -24,7 +24,7 @@ def district_index_refresh(request):
     return render(request, 'district_index.html', context)
 
 def district_index_display(request):
-    districts = HomeModel.objects.all()
+    districts = DistrictsModel.objects.all()
     context = {
         'districts': districts
     }
@@ -32,7 +32,7 @@ def district_index_display(request):
     return render(request, 'district_index.html', context)
 
 def district_detail(request, pk):
-    district = HomeModel.objects.get(pk=pk)
+    district = DistrictsModel.objects.get(pk=pk)
     context = {
         'district' : district
     }
