@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('districts/', include('home.urls')),
     path('surveillance/', include('face_mask_detect.urls')),
+    path('districts/', include('districts.urls')),
 ]

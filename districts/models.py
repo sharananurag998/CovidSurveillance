@@ -2,7 +2,8 @@ from django.db import models
 
 # Create your models here.
 
-class HomeModel(models.Model):
+class DistrictsModel(models.Model):
     state = models.TextField()
     district = models.TextField()
     zone = models.TextField()
+    lastupdated = models.DateTimeField(auto_now=True)
