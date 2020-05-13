@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block page_content %}
+        
+    <div class="container">
+        <h1>surveillance Page</h1>
+
+        <p>
+            <strong>Faces Detected: </strong><span id="faceCount">0</span>
+        </p>
+        <p>
+            <strong>Mask Count: </strong><span id="maskCount">0</span>
+        </p>
+        <p>
+            <strong>Ratio of people with mask to people with no masks: </strong><span id="ratio">0</span>
+        </p>
+        <p>
+            <strong>With Mask - Average Prediction Accuracy: </strong><span id="avgMaskPred">0</span>
+        </p>
+        <p>
+            <strong>Without Mask - Average Prediction Accuracy: </strong><span id="avgWithoutMaskPred">0</span>
+        </p>
+    </div>
+
+
+
+    <script type="text/javascript">
+
+        const DOMStrings = {
+            "mask": "maskCount",
+            "face": "faceCount",
+            "ratio": "ratio",
+            "maskPred": "avgMaskPred",
+            "withoutmaskPred": "avgWithoutMaskPred"
+        };
+
+
+        const url = "http://127.0.0.1:8000/surveillance/data";
+        if (typeof(EventSource) !== 'undefined') {
+            const source = new EventSource(url);
+
+            faceCountDisplay = document.getElementById(DOMStrings.face);
+            maskCountDisplay = document.getElementById(DOMStrings.mask);
+            ratioDisplay = document.getElementById(DOMStrings.ratio);
+            maskPredDisplay = document.getElementById(DOMStrings.maskPred);
+            withoutmaskPredDisplay = document.getElementById(DOMStrings.withoutmaskPred);
+
+            source.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+
+                faceCountDisplay.innerHTML = data.face_count;
+                maskCountDisplay.innerHTML = data.mask_count;
+                ratioDisplay.innerHTML = data.ratio;
+                maskPredDisplay.innerHTML = data.avg_mask_pred;
+                withoutmaskPredDisplay.innerHTML = data.avg_withoutMask_pred;
+
+            }
+            source.onopen = (event) => {
+                console.log("Opened a SSE");
+                console.log(event);
+            }
+            source.onerror = (event) => {
+                console.log("[ERR] Error maintaining connection with SSE");
+                console.log(event);
+                console.log("Closing connection");
+                source.close();
+            }
+        }
+
+    </script>
+
+{% endblock page_content %}

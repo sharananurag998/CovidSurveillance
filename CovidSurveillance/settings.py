@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
+    'face_mask_detect',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'CovidSurveillance.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'CovidSurveillance/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'CovidSurveillance', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
