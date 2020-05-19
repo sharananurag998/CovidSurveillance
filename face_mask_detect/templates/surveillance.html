@@ -5,7 +5,7 @@
         
     <div class="container">
         <h1 style="margin-top:15px; margin-bottom:15px"><b>Surveillance Page</b></h1>
-
+        
         <p>
             <strong>Faces Detected: </strong><span id="faceCount">0</span>
         </p>
@@ -21,6 +21,8 @@
         <p>
             <strong>Without Mask - Average Prediction Accuracy: </strong><span id="avgWithoutMaskPred">0</span>
         </p>
+
+        <a href="{% url 'surveillance_index_data' %}" style="margin:10px;"><button type="button" class="btn btn-primary">Surveillance Data (JSON)</button></a>
     </div>
 
 
