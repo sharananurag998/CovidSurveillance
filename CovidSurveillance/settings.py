@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'face_mask_detect',
     'districts',
+    'home',
 ]
 
 MIDDLEWARE = [
