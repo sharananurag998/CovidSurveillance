@@ -2,34 +2,14 @@
 
 {% load static %}
 {% block page_content %}
-<!--- Maps used from mapsvg.com -->
 
-<style>
 
-    .mapdiv {
-        text-align : center;
-        margin : auto;
-    }
-
-    .mapdiv path {
-        fill : #7823a8;
-        stroke : #ffffff;
-        stroke-width : 1.5px;
-        transaction : fill 0.3s;
-    }
-
-    .mapdiv :hover {
-        fill : #000000 ;
-    }
-
-</style>
-        
+   <link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
 <h1 style="margin:15px 20px 20px 20px"><b>Home Page</b></h1>
 
 <div class="mapdiv">
 <svg
    version="1.1"
-   id="svg2"
    height="695.70178"
    width="611.85999">
   <defs
@@ -275,5 +255,52 @@
 </svg>
 
 </div>
+
+<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<div class="table100">
+					<table>
+						<thead>
+							<tr class="table100-head" style="padding:center;">
+								<th class="column1">Serial No.</th>
+								<th class="column2">State</th>
+								<th class="column3">Confirmed</th>
+								<th class="column4">Active</th>
+								<th class="column5">Recovered</th>
+								<th class="column6">Deceased</th>
+							</tr>
+						</thead>
+						<tbody>
+								<tr>
+									<td class="column1">1.</td>
+									<td class="column2">Karnataka</td>
+									<td class="column3">10,000</td>
+									<td class="column4">8,000</td>
+									<td class="column5">1,200</td>
+									<td class="column6">15</td>
+								</tr>
+								<tr>
+									<td class="column1">2.</td>
+									<td class="column2">Goa</td>
+									<td class="column3">325</td>
+									<td class="column4">215</td>
+									<td class="column5">112</td>
+									<td class="column6">18</td>
+								</tr>
+								<tr>
+									<td class="column1">3.</td>
+									<td class="column2">Delhi</td>
+									<td class="column3">34,015</td>
+									<td class="column4">27,452</td>
+									<td class="column5">7,000</td>
+									<td class="column6">3,478</td>
+								</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 
 {% endblock page_content %}
