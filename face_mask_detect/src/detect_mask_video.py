@@ -19,7 +19,6 @@ def detect_and_predict_mask(frame, faceNet, maskNet, args):
 	# initialize our list of faces, their corresponding locations,
 	# and the list of predictions from our face mask network
 	faces = []
-	locs = []
 	preds = []
 	mask_count = 0
 
@@ -61,12 +60,8 @@ def detect_and_predict_mask(frame, faceNet, maskNet, args):
 			# add the face and bounding boxes to their respective
 			# lists
 			faces.append(face)
-			locs.append((startX, startY, endX, endY))
 
 	face_count = len(faces)
 
-	# Average accuracy of the predictions 
-	avg_mask_pred, avg_withoutMask_pred = np.mean(preds, axis=0)
-
 	# return a 4-tuple of the average accuracy and relevant data
-	return (avg_mask_pred, avg_withoutMask_pred, face_count, mask_count)
+	return (face_count, mask_count)

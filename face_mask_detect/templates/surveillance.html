@@ -3,58 +3,133 @@
 {% load static %}
 {% block page_content %}
         
-    <div class="container">
-        <h1>surveillance Page</h1>
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+    <main>
+        <div class="container pt-2">
+            <header class="header">
+                <h1 class="title">Surveillance Stats</h1>
+            </header>
 
-        <p>
-            <strong>Faces Detected: </strong><span id="faceCount">0</span>
-        </p>
-        <p>
-            <strong>Mask Count: </strong><span id="maskCount">0</span>
-        </p>
-        <p>
-            <strong>Ratio of people with mask to people with no masks: </strong><span id="ratio">0</span>
-        </p>
-        <p>
-            <strong>With Mask - Average Prediction Accuracy: </strong><span id="avgMaskPred">0</span>
-        </p>
-        <p>
-            <strong>Without Mask - Average Prediction Accuracy: </strong><span id="avgWithoutMaskPred">0</span>
-        </p>
-    </div>
+            <div class="loader-wrapper">
+                <div class="loader"></div>
 
+                <div class="loader-section section-left"></div>
+                <div class="loader-section section-right"></div>
 
+                <div class="loading">
+                    <h2>Loading....</h2>
+                </div>
+            </div>
+
+            <table class="table table-bordered table-dark">
+
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td colspan="2"><strong>Faces Detected: </strong></td>
+                        <td><span id="faceCount">-</span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td colspan="2"><strong>Mask Count: </strong></td>
+                        <td><span id="maskCount">-</span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td colspan="2"><strong>Ratio: </strong></td>
+                        <td><span id="ratio">-</span></td>
+                    </tr>
+                    <tr>
+                        <th>Average stats of every: 30 Frames</th>
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td colspan="2"><strong>Total Faces detected: </strong></td>
+                        <td><span id="totalFaceCount">-</span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td colspan="2"><strong>Total Masks detected: </strong></td>
+                        <td><span id="totalMaskCount">-</span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td colspan="2"><strong>Total Ratio: </strong></td>
+                        <td><span id="totalRatio">-</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
 
     <script type="text/javascript">
 
+        // DOM Strings go here
         const DOMStrings = {
             "mask": "maskCount",
             "face": "faceCount",
+            "totalFaceCount": "totalFaceCount",
+            "totalMaskCount": "totalMaskCount",
+            "totalRatio" : "totalRatio",
             "ratio": "ratio",
-            "maskPred": "avgMaskPred",
-            "withoutmaskPred": "avgWithoutMaskPred"
+            "videoSource": "videoSrc",
         };
-
 
         const url = "http://127.0.0.1:8000/surveillance/data";
         if (typeof(EventSource) !== 'undefined') {
+            // Create a new Event Source to make a SSE request
             const source = new EventSource(url);
 
+            // DOM Elements
             faceCountDisplay = document.getElementById(DOMStrings.face);
             maskCountDisplay = document.getElementById(DOMStrings.mask);
             ratioDisplay = document.getElementById(DOMStrings.ratio);
-            maskPredDisplay = document.getElementById(DOMStrings.maskPred);
-            withoutmaskPredDisplay = document.getElementById(DOMStrings.withoutmaskPred);
 
+            totalFaceCountDisplay = document.getElementById(DOMStrings.totalFaceCount);
+            totalMaskCountDisplay = document.getElementById(DOMStrings.totalMaskCount);
+            totalRatioDisplay = document.getElementById(DOMStrings.totalRatio);
+
+            videoSrc = document.getElementById(DOMStrings.videoSource);
+            title = document.querySelector(".header .title");
+            main = document.querySelector("main");
+
+            // Variables
+            let counter = 0, totalFaceCount = 0, totalMaskCount = 0, totalRatio = '-';
             source.onmessage = (event) => {
+                // Get data from server and parse as JSON
                 const data = JSON.parse(event.data);
 
                 faceCountDisplay.innerHTML = data.face_count;
                 maskCountDisplay.innerHTML = data.mask_count;
-                ratioDisplay.innerHTML = data.ratio;
-                maskPredDisplay.innerHTML = data.avg_mask_pred;
-                withoutmaskPredDisplay.innerHTML = data.avg_withoutMask_pred;
+                ratioDisplay.innerHTML = (data.ratio * 100).toFixed(1);
 
+                // Find Total Stats for duration of 30 frames
+                if (counter < 30) {
+                    totalFaceCount += data.face_count;
+                    totalMaskCount += data.mask_count;
+                    if (totalFaceCount > 0) {
+                        totalRatio = (totalMaskCount / totalFaceCount * 100).toFixed(1);
+                    } else {
+                        totalRatio = '-';
+                    }
+
+                    counter++;
+                } else {
+                    // display the total counts
+                    totalFaceCountDisplay.innerHTML = totalFaceCount;
+                    totalMaskCountDisplay.innerHTML = totalMaskCount;
+                    totalRatioDisplay.innerHTML = totalRatio;
+
+                    // Reset for the next 30 frames
+                    totalMaskCount = 0;
+                    totalFaceCount = 0;
+                    totalRatio = '-';
+                    counter = 0;
+                }
+
+                // Hide the loading screen and set the display of title.
+                main.classList.add("loaded");
+                title.classList.add("title-loaded");
             }
             source.onopen = (event) => {
                 console.log("Opened a SSE");
