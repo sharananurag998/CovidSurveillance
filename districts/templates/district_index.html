@@ -9,10 +9,10 @@ active
     <div class = "pagestart" style="margin: 20px 10px 10px 20px">
         <br>
         <div class="row">
-        <div class="col-md-4"><h1>Districts: -</h1></div>
+        <div class="col-md-4"><h1><b>Districts</b></h1></div>
         <div class="col-md-4 offset-md-4">
             Last Updated: {{ districts.0.lastupdated }}
-            <a href="/districts/refresh"><button type="button" class="btn btn-primary">Refresh</button></a>
+            <a href={%url 'district_index_refresh'%}><button type="button" class="btn btn-primary">Refresh</button></a>
         </div>
         </div>
         
