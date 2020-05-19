@@ -2,8 +2,9 @@
 
 {% load static %}
 {% block page_content %}
-        
-    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}">
     <main>
         <div class="container pt-2">
             <header class="header">
@@ -21,129 +22,57 @@
                 </div>
             </div>
 
-            <table class="table table-bordered table-dark">
+            <table class="table table-hover table-dark">
                 <tbody>
+                    <thead style="width: 100%; text-align: center;" class="thead-dark">
+                        <th colspan="3">REAL TIME DATA</th>                        
+                    </thead>
                     <tr>
-                        <th scope="row">1</th>
-                        <td colspan="2"><strong>Faces Detected: </strong></td>
-                        <td><span id="faceCount">-</span></td>
+                        <th style="width: 10%;" scope="row">1</th>
+                        <td style="width: 75%;"><strong>Faces Detected: </strong></td>
+                        <td style="width: 15%;"><span id="faceCount">-</span></td>
                     </tr>
                     <tr>
-                        <th scope="row">2</th>
-                        <td colspan="2"><strong>Mask Count: </strong></td>
-                        <td><span id="maskCount">-</span></td>
+                        <th style="width: 10%;" scope="row">2</th>
+                        <td style="width: 75%;"><strong>Mask Count: </strong></td>
+                        <td style="width: 15%;"><span id="maskCount">-</span></td>
                     </tr>
                     <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2"><strong>Ratio: </strong></td>
-                        <td><span id="ratio">-</span></td>
+                        <th style="width: 10%;" scope="row">3</th>
+                        <td style="width: 75%;"><strong>Ratio: </strong></td>
+                        <td style="width: 15%;"><span id="ratio">-</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-hover table-dark">
+                <tbody>
+                    <thead style="width: 100%; text-align: center;" class="thead-dark">
+                        <th colspan="3">AVERAGE STATS OF EVERY: 30 FRAMES</th>
+                    </thead>
+                    <tr>
+                        <th style="width: 10%;" scope="row">1</th>
+                        <td style="width: 75%;"><strong>Total Faces detected: </strong></td>
+                        <td style="width: 15%;"><span id="totalFaceCount">-</span></td>
                     </tr>
                     <tr>
-                        <th colspan="3">Average stats of every: 30 Frames</th>
+                        <th style="width: 10%;" scope="row">2</th>
+                        <td style="width: 75%;"><strong>Total Masks detected: </strong></td>
+                        <td style="width: 15%;"><span id="totalMaskCount">-</span></td>
                     </tr>
                     <tr>
-                        <th scope="row">1</th>
-                        <td colspan="2"><strong>Total Faces detected: </strong></td>
-                        <td><span id="totalFaceCount">-</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td colspan="2"><strong>Total Masks detected: </strong></td>
-                        <td><span id="totalMaskCount">-</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2"><strong>Total Ratio: </strong></td>
-                        <td><span id="totalRatio">-</span></td>
+                        <th style="width: 10%;" scope="row">3</th>
+                        <td style="width: 75%;"><strong>Total Ratio: </strong></td>
+                        <td style="width: 15%;"><span id="totalRatio">-</span></td>
                     </tr>
                 </tbody>
             </table>
 
-            <a href="{% url 'surveillance_index_data' %}" style="margin:10px;"><button type="button" class="btn btn-primary">Surveillance Data (JSON)</button></a>
+           <!--  <a href="{% url 'surveillance_index_data' %}" style="margin:10px;"><button type="button" class="btn btn-secondary">Surveillance Data (JSON)</button></a> -->
+
+
         </div>
     </main>
 
-    <script type="text/javascript">
-
-        // DOM Strings go here
-        const DOMStrings = {
-            "mask": "maskCount",
-            "face": "faceCount",
-            "totalFaceCount": "totalFaceCount",
-            "totalMaskCount": "totalMaskCount",
-            "totalRatio" : "totalRatio",
-            "ratio": "ratio",
-            "videoSource": "videoSrc",
-        };
-
-        const url = "http://127.0.0.1:8000/surveillance/data";
-        if (typeof(EventSource) !== 'undefined') {
-            // Create a new Event Source to make a SSE request
-            const source = new EventSource(url);
-
-            // DOM Elements
-            faceCountDisplay = document.getElementById(DOMStrings.face);
-            maskCountDisplay = document.getElementById(DOMStrings.mask);
-            ratioDisplay = document.getElementById(DOMStrings.ratio);
-
-            totalFaceCountDisplay = document.getElementById(DOMStrings.totalFaceCount);
-            totalMaskCountDisplay = document.getElementById(DOMStrings.totalMaskCount);
-            totalRatioDisplay = document.getElementById(DOMStrings.totalRatio);
-
-            videoSrc = document.getElementById(DOMStrings.videoSource);
-            title = document.querySelector(".header .title");
-            main = document.querySelector("main");
-
-            // Variables
-            let counter = 0, totalFaceCount = 0, totalMaskCount = 0, totalRatio = '-';
-            source.onmessage = (event) => {
-                // Get data from server and parse as JSON
-                const data = JSON.parse(event.data);
-
-                faceCountDisplay.innerHTML = data.face_count;
-                maskCountDisplay.innerHTML = data.mask_count;
-                ratioDisplay.innerHTML = (data.ratio * 100).toFixed(1);
-
-                // Find Total Stats for duration of 30 frames
-                if (counter < 30) {
-                    totalFaceCount += data.face_count;
-                    totalMaskCount += data.mask_count;
-                    if (totalFaceCount > 0) {
-                        totalRatio = (totalMaskCount / totalFaceCount * 100).toFixed(1);
-                    } else {
-                        totalRatio = '-';
-                    }
-
-                    counter++;
-                } else {
-                    // display the total counts
-                    totalFaceCountDisplay.innerHTML = totalFaceCount;
-                    totalMaskCountDisplay.innerHTML = totalMaskCount;
-                    totalRatioDisplay.innerHTML = totalRatio;
-
-                    // Reset for the next 30 frames
-                    totalMaskCount = 0;
-                    totalFaceCount = 0;
-                    totalRatio = '-';
-                    counter = 0;
-                }
-
-                // Hide the loading screen and set the display of title.
-                main.classList.add("loaded");
-                title.classList.add("title-loaded");
-            }
-            source.onopen = (event) => {
-                console.log("Opened a SSE");
-                console.log(event);
-            }
-            source.onerror = (event) => {
-                console.log("[ERR] Error maintaining connection with SSE");
-                console.log(event);
-                console.log("Closing connection");
-                source.close();
-            }
-        }
-
-    </script>
+    <script type="text/javascript" src="{% static 'scripts/surveillance_stats.js' %}"></script>
 
 {% endblock page_content %}

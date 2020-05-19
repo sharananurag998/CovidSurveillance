@@ -14,12 +14,17 @@ import json
 class VideoStream():
     def __init__(self):
         # initialize the video into our 
-        video_url_path = os.path.join("face_mask_detect/static", "stock_footage.webm")
+        video_url_path = os.path.join("face_mask_detect", "static", "footages", "stock_footage.webm")
         self.vs = FileVideoStream(path=video_url_path).start()
 
     def get_frame(self):
         frame = self.vs.read()
         return frame
+
+    def reset(self):
+        self.end_process()
+        video_url_path = os.path.join("face_mask_detect", "static", "footages", "stock_footage.webm")
+        self.vs = FileVideoStream(path=video_url_path).start()
 
     def end_process(self):
         self.vs.stop()
@@ -77,5 +82,7 @@ def get_surveillance_data(request):
     return response
 
 def surveillance_view(request):
+    global vstream
+    vstream.reset()
     return render(request, 'surveillance.html', {})
 

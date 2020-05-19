@@ -1,15 +1,21 @@
 body, html {
     background-color: gray;
-    background-image: url("../surveillance_index_4.jpg");
+    background-image: url("../images/surveillance_index_4.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    font-family: 'NeueMachina';
+}
+
+@font-face {
+  font-family: 'NeueMachina';
+  src: local('NeueMachina'), url("../static/fonts/NeueMachina-Ultrabold.otf") format('opentype');
 }
 
 .title {
     text-align: center;
     margin-top: 50px;
-    font-weight: 700;
+    font-weight: 400px;
     letter-spacing: 20px;
     font-size: 100px;
     margin: 20px -15px 40px -15px;
@@ -110,13 +116,15 @@ body, html {
 }
 
 .loading {
+    width: 200px;
     position: fixed;
     top: 60%;
     left: 50%;
-    color: #b3b3b3;
-    text-align: center;
-    width: 200px;
     margin-left: -100px;
+    color: #b3b3b3;
+    line-height: 50px;
+    letter-spacing: 15px;
+    text-align: center;
     z-index: 1001;
 }
 
