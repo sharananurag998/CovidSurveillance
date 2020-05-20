@@ -4,7 +4,8 @@
 {% block page_content %}
 
 
-   <link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
+<script src="{% static 'home.js' %}"></script>
 <h1 style="margin:15px 20px 20px 20px"><b>Home Page</b></h1>
 
 <div class="mapdiv">
@@ -262,40 +263,16 @@
 				<div class="table100">
 					<table>
 						<thead>
-							<tr class="table100-head" style="padding:center;">
-								<th class="column1">Serial No.</th>
-								<th class="column2">State</th>
-								<th class="column3">Confirmed</th>
-								<th class="column4">Active</th>
-								<th class="column5">Recovered</th>
-								<th class="column6">Deceased</th>
+							<tr class="table100-head">
+								<th class="column1">State</th>
+								<th class="column2">Confirmed</th>
+								<th class="column3">Active</th>
+								<th class="column4">Recovered</th>
+								<th class="column5">Deceased</th>
 							</tr>
 						</thead>
-						<tbody>
-								<tr>
-									<td class="column1">1.</td>
-									<td class="column2">Karnataka</td>
-									<td class="column3">10,000</td>
-									<td class="column4">8,000</td>
-									<td class="column5">1,200</td>
-									<td class="column6">15</td>
-								</tr>
-								<tr>
-									<td class="column1">2.</td>
-									<td class="column2">Goa</td>
-									<td class="column3">325</td>
-									<td class="column4">215</td>
-									<td class="column5">112</td>
-									<td class="column6">18</td>
-								</tr>
-								<tr>
-									<td class="column1">3.</td>
-									<td class="column2">Delhi</td>
-									<td class="column3">34,015</td>
-									<td class="column4">27,452</td>
-									<td class="column5">7,000</td>
-									<td class="column6">3,478</td>
-								</tr>
+						<tbody id="table-body">
+								
 						</tbody>
 					</table>
 				</div>
