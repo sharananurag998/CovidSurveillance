@@ -2,12 +2,12 @@
 
 {% load static %}
 {% block page_content %}
-
-
 <link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
 <script src="{% static 'home.js' %}"></script>
-<h1 style="margin:15px 20px 20px 20px"><b>Home Page</b></h1>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+
+<h1 style="margin:15px 20px 20px 20px"><b>Home Page</b></h1>
 <div class="mapdiv">
 <svg
    version="1.1"
@@ -261,7 +261,7 @@
 		<div class="container-table100">
 			<div class="wrap-table100">
 				<div class="table100">
-					<table>
+					<table id="state_table">
 						<thead>
 							<tr class="table100-head">
 								<th class="column1">State</th>
@@ -271,13 +271,11 @@
 								<th class="column5">Deceased</th>
 							</tr>
 						</thead>
-						<tbody id="table-body">
-								
+						<tbody id="table-body">	
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
 	</div>
-
 {% endblock page_content %}
