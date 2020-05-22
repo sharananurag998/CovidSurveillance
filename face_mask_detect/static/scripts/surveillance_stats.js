@@ -6,7 +6,6 @@ const DOMStrings = {
     "totalMaskCount": "totalMaskCount",
     "totalRatio" : "totalRatio",
     "ratio": "ratio",
-    "videoSource": "videoSrc",
 };
 
 const url = "http://127.0.0.1:8000/surveillance/data";
@@ -23,12 +22,12 @@ if (typeof(EventSource) !== 'undefined') {
     totalMaskCountDisplay = document.getElementById(DOMStrings.totalMaskCount);
     totalRatioDisplay = document.getElementById(DOMStrings.totalRatio);
 
-    videoSrc = document.getElementById(DOMStrings.videoSource);
+    video = document.querySelector("video");
     title = document.querySelector(".header .title");
     main = document.querySelector("main");
 
     // Variables
-    let counter = 0, totalFaceCount = 0, totalMaskCount = 0, totalRatio = '-';
+    let counter = 0, totalFaceCount = 0, totalMaskCount = 0, totalRatio = '-', videoPlayback = false;
     source.onmessage = (event) => {
         // Get data from server and parse as JSON
         const data = JSON.parse(event.data);
@@ -64,6 +63,12 @@ if (typeof(EventSource) !== 'undefined') {
         // Hide the loading screen and set the display of title.
         main.classList.add("loaded");
         title.classList.add("title-loaded");
+
+        if (!videoPlayback) {
+            video.play();
+            video.playbackRate = 0.15;
+            videoPlayback = true;
+        }
     }
     source.onopen = (event) => {
         console.log("Opened a SSE");

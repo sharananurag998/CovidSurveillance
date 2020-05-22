@@ -14,7 +14,7 @@ import json
 class VideoStream():
     def __init__(self):
         # initialize the video into our 
-        video_url_path = os.path.join("face_mask_detect", "static", "footages", "stock_footage.webm")
+        video_url_path = os.path.join("face_mask_detect", "static", "footages", "cottonbro_2.mp4")
         self.vs = FileVideoStream(path=video_url_path).start()
 
     def get_frame(self):
@@ -23,7 +23,7 @@ class VideoStream():
 
     def reset(self):
         self.end_process()
-        video_url_path = os.path.join("face_mask_detect", "static", "footages", "stock_footage.webm")
+        video_url_path = os.path.join("face_mask_detect", "static", "footages", "cottonbro_2.mp4")
         self.vs = FileVideoStream(path=video_url_path).start()
 
     def end_process(self):
