@@ -66,7 +66,7 @@ if (typeof(EventSource) !== 'undefined') {
 
         if (!videoPlayback) {
             video.play();
-            video.playbackRate = 0.15;
+            video.playbackRate = 0.5;
             videoPlayback = true;
         }
     }
