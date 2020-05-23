@@ -14,7 +14,7 @@ import json
 class VideoStream():
     def __init__(self):
         # initialize the video into our 
-        video_url_path = os.path.join("face_mask_detect/static", "stock_footage.webm")
+        video_url_path = os.path.join("face_mask_detect/static", "tokyo_footage.mp4")
         self.vs = FileVideoStream(path=video_url_path).start()
 
     def get_frame(self):
@@ -98,7 +98,7 @@ def gen_surveillance_data():
         # }
 
         ratio = str(mask_count / face_count if face_count > 0 else None)
-        result = f'data: {{\ndata: "mask_count": {mask_count},\ndata: "face_count": {face_count},\ndata: "ratio": {ratio},\ndata: "avg_mask_pred": {avg_mask_pred},\ndata: "avg_withoutMask_pred": {avg_withoutMask_pred}\ndata: }}\n\n'
+        result = 'data: {{\ndata: "mask_count": '+mask_count+',\ndata: "face_count": '+face_count+',\ndata: "ratio": '+ratio+',\ndata: "avg_mask_pred": '+avg_mask_pred+',\ndata: "avg_withoutMask_pred": '+avg_withoutMask_pred+'\ndata: }}\n\n'
         # data = json.dumps(data)
 
         # time.sleep(1.5)
