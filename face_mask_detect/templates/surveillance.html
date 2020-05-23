@@ -2,72 +2,82 @@
 
 {% load static %}
 {% block page_content %}
-        
-    <div class="container">
-        <h1>surveillance Page</h1>
 
-        <p>
-            <strong>Faces Detected: </strong><span id="faceCount">0</span>
-        </p>
-        <p>
-            <strong>Mask Count: </strong><span id="maskCount">0</span>
-        </p>
-        <p>
-            <strong>Ratio of people with mask to people with no masks: </strong><span id="ratio">0</span>
-        </p>
-        <p>
-            <strong>With Mask - Average Prediction Accuracy: </strong><span id="avgMaskPred">0</span>
-        </p>
-        <p>
-            <strong>Without Mask - Average Prediction Accuracy: </strong><span id="avgWithoutMaskPred">0</span>
-        </p>
-    </div>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}">
+    <main>
+        <div class="container pt-2">
+            <header class="header">
+                <h1 class="title">Surveillance Stats</h1>
+            </header>
+
+            <video width="1110" height="700" controls>
+                <source src="{% static 'footages/cottonbro_2.mp4' %}" type="video/mp4">
+                Your Browser ins't supported
+            </video>
+
+            <div class="loader-wrapper">
+                <div class="loader"></div>
+
+                <div class="loader-section section-left"></div>
+                <div class="loader-section section-right"></div>
+
+                <div class="loading">
+                    <h2>Loading....</h2>
+                </div>
+            </div>
+
+            <table class="table table-hover table-dark">
+                <tbody>
+                    <thead style="width: 100%; text-align: center;" class="thead-dark">
+                        <th colspan="3">REAL TIME DATA</th>                        
+                    </thead>
+                    <tr>
+                        <th style="width: 10%;" scope="row">1</th>
+                        <td style="width: 75%;"><strong>Faces Detected: </strong></td>
+                        <td style="width: 15%;"><span id="faceCount">-</span></td>
+                    </tr>
+                    <tr>
+                        <th style="width: 10%;" scope="row">2</th>
+                        <td style="width: 75%;"><strong>Mask Count: </strong></td>
+                        <td style="width: 15%;"><span id="maskCount">-</span></td>
+                    </tr>
+                    <tr>
+                        <th style="width: 10%;" scope="row">3</th>
+                        <td style="width: 75%;"><strong>Ratio: </strong></td>
+                        <td style="width: 15%;"><span id="ratio">-</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-hover table-dark">
+                <tbody>
+                    <thead style="width: 100%; text-align: center;" class="thead-dark">
+                        <th colspan="3">AVERAGE STATS OF EVERY: 30 FRAMES</th>
+                    </thead>
+                    <tr>
+                        <th style="width: 10%;" scope="row">1</th>
+                        <td style="width: 75%;"><strong>Total Faces detected: </strong></td>
+                        <td style="width: 15%;"><span id="totalFaceCount">-</span></td>
+                    </tr>
+                    <tr>
+                        <th style="width: 10%;" scope="row">2</th>
+                        <td style="width: 75%;"><strong>Total Masks detected: </strong></td>
+                        <td style="width: 15%;"><span id="totalMaskCount">-</span></td>
+                    </tr>
+                    <tr>
+                        <th style="width: 10%;" scope="row">3</th>
+                        <td style="width: 75%;"><strong>Total Ratio: </strong></td>
+                        <td style="width: 15%;"><span id="totalRatio">-</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+           <!--  <a href="{% url 'surveillance_index_data' %}" style="margin:10px;"><button type="button" class="btn btn-secondary">Surveillance Data (JSON)</button></a> -->
 
 
+        </div>
+    </main>
 
-    <script type="text/javascript">
-
-        const DOMStrings = {
-            "mask": "maskCount",
-            "face": "faceCount",
-            "ratio": "ratio",
-            "maskPred": "avgMaskPred",
-            "withoutmaskPred": "avgWithoutMaskPred"
-        };
-
-
-        const url = "http://127.0.0.1:8000/surveillance/data";
-        if (typeof(EventSource) !== 'undefined') {
-            const source = new EventSource(url);
-
-            faceCountDisplay = document.getElementById(DOMStrings.face);
-            maskCountDisplay = document.getElementById(DOMStrings.mask);
-            ratioDisplay = document.getElementById(DOMStrings.ratio);
-            maskPredDisplay = document.getElementById(DOMStrings.maskPred);
-            withoutmaskPredDisplay = document.getElementById(DOMStrings.withoutmaskPred);
-
-            source.onmessage = (event) => {
-                const data = JSON.parse(event.data);
-
-                faceCountDisplay.innerHTML = data.face_count;
-                maskCountDisplay.innerHTML = data.mask_count;
-                ratioDisplay.innerHTML = data.ratio;
-                maskPredDisplay.innerHTML = data.avg_mask_pred;
-                withoutmaskPredDisplay.innerHTML = data.avg_withoutMask_pred;
-
-            }
-            source.onopen = (event) => {
-                console.log("Opened a SSE");
-                console.log(event);
-            }
-            source.onerror = (event) => {
-                console.log("[ERR] Error maintaining connection with SSE");
-                console.log(event);
-                console.log("Closing connection");
-                source.close();
-            }
-        }
-
-    </script>
+    <script type="text/javascript" src="{% static 'scripts/surveillance_stats.js' %}"></script>
 
 {% endblock page_content %}
