@@ -65,7 +65,8 @@ def gen_surveillance_data():
         (face_count, mask_count) = detect_and_predict_mask(frame, faceNet, maskNet, args)
 
         ratio = str(mask_count / face_count if face_count > 0 else None)
-        result = f'data: {{\ndata: "mask_count": {mask_count},\ndata: "face_count": {face_count},\ndata: "ratio": {ratio}\ndata: }}\n\n'
+        result = 'data: {{\ndata: "mask_count": '+mask_count+',\ndata: "face_count": '+face_count+',\ndata: "ratio": '+ratio+',\ndata: "avg_mask_pred": '+avg_mask_pred+',\ndata: "avg_withoutMask_pred": '+avg_withoutMask_pred+'\ndata: }}\n\n'
+        # data = json.dumps(data)
 
         # time.sleep(1.5)
         yield result
