@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block page_content %}
+    
+    <main>
+        <div class="container">
+            <div class="header">
+                <h1>Welcome to Social Distancing Monitor</h1>
+            </div>
+
+            <img src="{% static 'DoubleRing.gif' %}">
+        </div>
+    </main>
+
+<script type="text/javascript">
+
+    data_url = "http://0.0.0.0:5002/";
+    post_url = "http://127.0.0.1:8000/surveillance/socialDistanceMonitor/data";
+    const img = document.querySelector('img');
+
+    fetch(post_url)
+    .then(
+        setTimeout(requestData, 3000, data_url)
+    );
+    function requestData(url) {
+        fetch(url)
+        .then(data => {
+            console.log('Response: ' + data);
+            img.src = data_url;
+        });
+    };
+
+</script>
+
+{% endblock page_content %}

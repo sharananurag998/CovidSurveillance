@@ -8,7 +8,7 @@ const DOMStrings = {
     "ratio": "ratio",
 };
 
-const url = "http://127.0.0.1:8000/surveillance/data";
+const url = "http://127.0.0.1:8000/surveillance/faceMaskMonitor/data";
 if (typeof(EventSource) !== 'undefined') {
     // Create a new Event Source to make a SSE request
     const source = new EventSource(url);

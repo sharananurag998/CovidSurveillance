@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'face_mask_detect',
     'districts',
     'home',
+    'social_distance_monitor',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# CORS_ORIGIN_ALLOW_ALL = True
+
 
 ROOT_URLCONF = 'CovidSurveillance.urls'
 
@@ -101,7 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
