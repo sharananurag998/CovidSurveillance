@@ -2,14 +2,26 @@
 
 {% load static %}
 {% block page_content %}
-    
+        
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/index.css' %}">
+
     <main>
         <div class="container">
-            <div class="header">
-                <h1>Welcome to Social Distancing Monitor</h1>
+            <div class="header mt-5 mb-5">
+                <h1>Social Distancing Monitor</h1>
             </div>
 
-            <img src="{% static 'DoubleRing.gif' %}">
+            <div class="loader-section">
+                <div class="loader"></div>
+            </div>
+
+            <div class="loading">
+                <h2>Loading</h2>
+            </div>
+
+            <div class="stream mt-3 mb-5">
+                <img class="content" src="{% static 'images/surveillance_index_1.jpg' %}" alt="{% static 'images/surveillance_index_1.jpg' %}">
+            </div>
         </div>
     </main>
 
@@ -18,18 +30,18 @@
     data_url = "http://0.0.0.0:5002/";
     post_url = "http://127.0.0.1:8000/surveillance/socialDistanceMonitor/data";
     const img = document.querySelector('img');
+    const main = document.querySelector('main');
+    const header = document.querySelector('.header h1');
 
     fetch(post_url)
     .then(
-        setTimeout(requestData, 3000, data_url)
+        setTimeout(requestData, 5000, data_url)
     );
     function requestData(url) {
-        fetch(url)
-        .then(data => {
-            console.log('Response: ' + data);
-            img.src = data_url;
-        });
-    };
+        img.src = data_url;
+        main.classList.add('loaded');
+        header.style.color = '#323232';
+    }
 
 </script>
 
