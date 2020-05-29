@@ -9,6 +9,7 @@ Hackathon submission for the JeevaSamrakshak Hackathon hosted by REVA University
 * OpenCV
 * Pillow
 * imutils
+* Pyturbojpeg
 
 
 ## Contributors
