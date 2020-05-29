@@ -118,3 +118,7 @@ GitHub.sublime-settings
 
 # IntelliJ Idea #
 .idea/*
+
+
+# API keys
+**/districts/static/config.js
