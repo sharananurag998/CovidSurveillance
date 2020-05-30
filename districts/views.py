@@ -7,6 +7,9 @@ import datetime
 def hello_world(request):
     return render(request, 'homepage.html', {})
 
+def apinotfound(request):
+    return render(request, 'api_not_found.html', {})
+
 def district_index_refresh(request):
     response = requests.get('https://api.covid19india.org/zones.json')
     zonedata = response.json()
