@@ -116,6 +116,9 @@ GitHub.sublime-settings
 !.vscode/extensions.json 
 .history
 
+# Visual Studio 2019 # 
+.vs/*
+
 # IntelliJ Idea #
 .idea/*
 
