@@ -31,16 +31,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item {% block home_active %} {% endblock home_active %}">
-              <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{% url 'home' %}">Home</a>
             </li>
             <li class="nav-item {% block districts_active %} {% endblock districts_active %}">
               <a class="nav-link" href="{% url 'district_index_display' %}">Districts</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'surveillance_index' %}">Face Mask Detection</a>
+            <li class="nav-item {% block face_mask_detection_active %} {% endblock face_mask_detection_active %}">
+              <a class="nav-link" href="{% url 'surveillance_index' %}">Face&nbspMask&nbspDetection</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'social_distancing_index' %}">Social Distance Monitoring</a>
+            <li class="nav-item {% block social_distance_monitoring_active %} {% endblock social_distance_monitoring_active %}">
+              <a class="nav-link" href="{% url 'social_distancing_index' %}">Social&nbspDistance&nbspMonitoring</a>
             </li>
           </ul>
         </div>
