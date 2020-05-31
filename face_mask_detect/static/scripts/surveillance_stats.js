@@ -22,12 +22,16 @@ if (typeof(EventSource) !== 'undefined') {
     totalMaskCountDisplay = document.getElementById(DOMStrings.totalMaskCount);
     totalRatioDisplay = document.getElementById(DOMStrings.totalRatio);
 
-    video = document.querySelector("video");
+    stream = document.querySelector("img");
     title = document.querySelector(".header .title");
     main = document.querySelector("main");
 
+    setTimeout(function() {
+        stream.src = "http://0.0.0.0:5001/"
+    }, 5000)
+
     // Variables
-    let counter = 0, totalFaceCount = 0, totalMaskCount = 0, totalRatio = '-', videoPlayback = false;
+    let counter = 0, totalFaceCount = 0, totalMaskCount = 0, totalRatio = '-';
     source.onmessage = (event) => {
         // Get data from server and parse as JSON
         const data = JSON.parse(event.data);
@@ -64,11 +68,11 @@ if (typeof(EventSource) !== 'undefined') {
         main.classList.add("loaded");
         title.classList.add("title-loaded");
 
-        if (!videoPlayback) {
-            video.play();
-            video.playbackRate = 0.5;
-            videoPlayback = true;
-        }
+        // if (!videoPlayback) {
+        //     video.play();
+        //     video.playbackRate = 0.5;
+        //     videoPlayback = true;
+        // }
     }
     source.onopen = (event) => {
         console.log("Opened a SSE");
