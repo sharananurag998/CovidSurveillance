@@ -27,7 +27,16 @@ active
         </table>
 
         <h2>Map</h2>
+        <center>
         <iframe width="600" id="mapframe" height="450" frameborder="0" style="border:0" allowfullscreen></iframe> 
+        
+        <br>
+        <br>
+        <a href= {% url 'surveillance_index' %}><button type="button" class="btn btn-info btn-lg">Face Mask Analysis</button></a>
+        <a href= {% url 'social_distancing_index' %}><button type="button" class="btn btn-warning btn-lg">Social Distancing Analysis</button></a>
+        </center>
     </div>
     <script src="{% static 'map_render.js' %}"></script>
+    <br>
+    
 {% endblock page_content %} 
