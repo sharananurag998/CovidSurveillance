@@ -28,7 +28,10 @@ active
                     <div class="card mb-2">
                         <div class="card-body">
                             <h5 class="card-title">{{ district.district }}</h5>
-                            <p class="card-text">{{ district.zone }} Zone</p>
+                            <p class="card-text">{{ district.zone }} Zone 
+                            <br>
+                            <a href="{% url 'state_detail' district.state %}">{{ district.state }}</a>
+                            </p>
                             <a href="{% url 'district_detail' district.pk %}" class="btn btn-primary">
                                 Read More
                             </a>
