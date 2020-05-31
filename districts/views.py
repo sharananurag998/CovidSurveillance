@@ -44,6 +44,16 @@ def district_detail(request, pk):
 def state_detail(request, state):
     state_dists = DistrictsModel.objects.filter(state=state)
     context = {
-        'districts': state_dists
+        'districts': state_dists,
+        'state' : state,
     }
     return render(request, 'state_detail.html', context)
+
+
+def district_detail_with_state(request, pk, state):
+    district = DistrictsModel.objects.get(pk=pk)
+    context = {
+        'district' : district,
+        'state' : state,
+    }
+    return render(request, 'district_detail.html', context)
