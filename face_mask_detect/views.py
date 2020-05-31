@@ -15,7 +15,7 @@ import cv2
 import os
 import sys
 import json
-
+import queue
 class VideoStream():
     def __init__(self):
         # initialize the video into our 

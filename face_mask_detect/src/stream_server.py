@@ -83,7 +83,7 @@ class StreamServer:
         # Configure server and reuse address
         self.s = socket.socket()
         self.s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.s.bind(('0.0.0.0', port))
+        self.s.bind(('127.0.0.1', port))
         self.s.listen()
 
         # Wait for new connections
@@ -96,7 +96,7 @@ class StreamServer:
                 print("Connection from {0} to local port {1}".format(addr, self.port), flush=True)
 
                 # Create new sending client queue
-                q = queue.Queue(128)
+                q = queue.Queue(256)
                 print(f"Inside LISTEN THREAD Q: {q}")
 
                 # Add queue to queue clients list
