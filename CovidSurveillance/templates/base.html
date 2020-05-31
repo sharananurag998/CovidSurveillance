@@ -2,18 +2,22 @@
 <html lang="en">
 <head>
     <style>
-      @font-face {
-  font-family: 'Product Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Open Sans'),local('OpenSans'),url(https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumwegdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
-  }
-
-  .main {
-    font-family:'Product Sans';
-  }
-
+    @font-face {
+      font-family: 'Product Sans';
+      font-style: normal;
+      font-weight: 400;
+      src: url(https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumwegdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+    }
+    .main {
+      font-family:'Product Sans';
+    }
+    .customClassForDropDown{
+       height: 300px;
+       overflow-y: auto;
+    }
+    .dropdown-menu .dropdown-item {display: inline-block; width: 100%; padding: 10px 5px;}
     </style>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -32,6 +36,44 @@
           <ul class="navbar-nav">
             <li class="nav-item {% block home_active %} {% endblock home_active %}">
               <a class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                States
+              </a>
+              <div class="dropdown-menu customClassForDropDown" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/districts/state/Andhra Pradesh">Andhra Pradesh</a>
+                <a class="dropdown-item" href="/districts/state/Arunachal Pradesh">Arunachal Pradesh</a>
+                <a class="dropdown-item" href="/districts/state/Assam">Assam</a>
+                <a class="dropdown-item" href="/districts/state/Bihar">Bihar</a>
+                <a class="dropdown-item" href="/districts/state/Chandigarh">Chandigarh</a>
+                <a class="dropdown-item" href="/districts/state/Chhattisgarh">Chhattisgarh</a>
+                <a class="dropdown-item" href="/districts/state/Delhi">Delhi</a>
+                <a class="dropdown-item" href="/districts/state/Goa">Goa</a>
+                <a class="dropdown-item" href="/districts/state/Gujrat">Gujrat</a>
+                <a class="dropdown-item" href="/districts/state/Himachal Pradesh">Himachal Pradesh</a>
+                <a class="dropdown-item" href="/districts/state/Haryana">Haryana</a>
+                <a class="dropdown-item" href="/districts/state/Jharkhand">Jharkhand</a>
+                <a class="dropdown-item" href="/districts/state/Jammu and Kashmir">Jammu and Kashmir</a>
+                <a class="dropdown-item" href="/districts/state/Karnataka">Karnataka</a>
+                <a class="dropdown-item" href="/districts/state/Kerala">Kerala</a>
+                <a class="dropdown-item" href="/districts/state/Maharashtra">Maharashtra</a>
+                <a class="dropdown-item" href="/districts/state/Meghalaya">Meghalaya</a>
+                <a class="dropdown-item" href="/districts/state/Manipur">Manipur</a>
+                <a class="dropdown-item" href="/districts/state/Madhya Pradesh">Madhya Pradesh</a>
+                <a class="dropdown-item" href="/districts/state/Assam">Mizoram</a>
+                <a class="dropdown-item" href="/districts/state/Nagaland">Nagaland</a>
+                <a class="dropdown-item" href="/districts/state/Odisha">Odisha</a>
+                <a class="dropdown-item" href="/districts/state/Punjab">Punjab</a>
+                <a class="dropdown-item" href="/districts/state/Rajasthan">Rajasthan</a>
+                <a class="dropdown-item" href="/districts/state/Sikkim">Sikkim</a>
+                <a class="dropdown-item" href="/districts/state/Telangana">Telangana</a>
+                <a class="dropdown-item" href="/districts/state/Tamil Nadu">Tamil Nadu</a>
+                <a class="dropdown-item" href="/districts/state/Tripura">Tripura</a>
+                <a class="dropdown-item" href="/districts/state/Uttar Pradesh">Uttar Pradesh</a>
+                <a class="dropdown-item" href="/districts/state/Uttarakhand">Uttarakhand</a>
+                <a class="dropdown-item" href="/districts/state/West Bengal">West Bengal</a>
+              </div>
             </li>
             <li class="nav-item {% block districts_active %} {% endblock districts_active %}">
               <a class="nav-link" href="{% url 'district_index_display' %}">Districts</a>
