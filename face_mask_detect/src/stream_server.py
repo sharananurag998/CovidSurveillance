@@ -97,7 +97,6 @@ class StreamServer:
 
                 # Create new sending client queue
                 q = queue.Queue(256)
-                print(f"Inside LISTEN THREAD Q: {q}")
 
                 # Add queue to queue clients list
                 self.queue_list.append(q)
@@ -113,7 +112,7 @@ class StreamServer:
         Send images over network
     '''
     def client_handler(self, c, q):
-        print("INSIDE CLIENT HANDLER")
+        # print("INSIDE CLIENT HANDLER")
         # Read request from remote web client
         data = c.recv(1024)
 
