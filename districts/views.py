@@ -40,3 +40,10 @@ def district_detail(request, pk):
         'district' : district
     }
     return render(request, 'district_detail.html', context)
+
+def state_detail(request, state):
+    state_dists = DistrictsModel.objects.filter(state=state)
+    context = {
+        'districts': state_dists
+    }
+    return render(request, 'state_detail.html', context)

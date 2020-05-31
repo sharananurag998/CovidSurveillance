@@ -51,8 +51,9 @@ body {
   background-color:#1F2739;
 }
 
-h1 {
-  color: #000000;
+h1,h3 {
+  color: rgb(255, 255, 255);
+  text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
 }
 
 h2 {
