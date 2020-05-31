@@ -27,7 +27,7 @@ if (typeof(EventSource) !== 'undefined') {
     main = document.querySelector("main");
 
     setTimeout(function() {
-        stream.src = "http://0.0.0.0:5001/"
+        stream.src = "http://127.0.0.1:5001/"
     }, 5000)
 
     // Variables

@@ -52,7 +52,6 @@ class VideoStream():
         self.vs.stop()
 
     def send_image(self, queue_list, image, ts):
-
         encoded_image = self.jpeg.encode(image, quality=80)
         # Put image into queue for each server thread
         for q in queue_list:
@@ -92,7 +91,7 @@ def gen_surveillance_data():
     while True:
         # read frames from the loaded VideoStream
         frame = vstream.vs.read()
-        frame = imutils.resize(frame, width=400)
+        frame = imutils.resize(frame, width=800)
 
         # processed data
         (locs, preds, face_count, mask_count) = detect_and_predict_mask(frame, faceNet, maskNet, args)
