@@ -125,3 +125,8 @@ GitHub.sublime-settings
 
 # API keys
 **/districts/static/config.js
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
