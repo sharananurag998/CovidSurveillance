@@ -43,9 +43,9 @@ class VideoStream():
         frame = self.vs.read()
         return frame
 
-    def reset(self):
+    def reset(self, url="cottonbro_2.mp4"):
         self.end_process()
-        video_url_path = os.path.join("face_mask_detect", "static", "footages", "cottonbro_2.mp4")
+        video_url_path = os.path.join("face_mask_detect", "static", "footages", url)
         self.vs = FileVideoStream(path=video_url_path).start()
 
     def end_process(self):
@@ -139,8 +139,8 @@ def get_surveillance_data(request):
     vstream.end_process()
     return response
 
-def surveillance_view(request):
+def surveillance_view(request, url="couple_footage.mp4"):
     global vstream
-    vstream.reset()
+    vstream.reset(url)
     return render(request, 'surveillance.html', {})
 
